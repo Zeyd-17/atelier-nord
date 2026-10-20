@@ -1,0 +1,42 @@
+ATELIER NORD — VERSION 7
+========================
+
+Contenu
+-------
+- atelier_nord_recrutement_v7.html : le site, avec une vitesse légèrement réduite sur la dernière vis et le bilan prêt à être partagé.
+- atelier_nord_bilans.sql : crée la table distante et ses permissions de lecture/ajout.
+
+IMPORTANT : le bilan partagé n'est pas activé tant que les étapes ci-dessous ne sont pas faites.
+Un simple fichier HTML ouvert depuis votre ordinateur ne peut pas synchroniser les scores entre plusieurs navigateurs. Il faut connecter la page à une base en ligne et héberger le fichier sur une adresse web en HTTPS.
+
+CONFIGURATION DU BILAN PARTAGÉ (une fois)
+-----------------------------------------
+1. Créez un projet Supabase sur https://supabase.com/.
+2. Dans le projet, ouvrez SQL Editor, créez une requête, collez tout le contenu du fichier atelier_nord_bilans.sql, puis exécutez-la.
+3. Dans Supabase, ouvrez le panneau Connect (ou Settings > API Keys). Copiez le Project URL et la clé Publishable. La clé publishable est prévue pour du code navigateur ; ne collez JAMAIS une clé Secret/service_role dans le site.
+4. Ouvrez atelier_nord_recrutement_v7.html dans un éditeur de texte.
+5. En haut du script, trouvez ces deux lignes :
+
+   const SUPABASE_URL = '';
+   const SUPABASE_PUBLISHABLE_KEY = '';
+
+   Collez vos valeurs entre les apostrophes, par exemple :
+
+   const SUPABASE_URL = 'https://VOTRE-PROJET.supabase.co';
+   const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_VOTRE_CLE';
+
+   Remplacez les exemples par les vraies valeurs de VOTRE projet. Ne partagez pas de clé Secret.
+6. Enregistrez le fichier puis hébergez le fichier HTML modifié sur un hébergement statique HTTPS (par exemple GitHub Pages ou Netlify). Tous les visiteurs doivent accéder à la même URL hébergée ; le lien sandbox ou un fichier ouvert directement sur un ordinateur n'est pas le site public partagé.
+7. Ouvrez la page publiée. Le statut en haut du bilan doit indiquer que la base partagée est connectée. Chaque bilan affiche le pseudo, le score et la date/heure ; la liste est actualisée automatiquement environ toutes les 10 secondes.
+
+COMPORTEMENT ET LIMITES
+-----------------------
+- Les bilans de la base sont conservés jusqu'à ce qu'une personne ayant un accès administratif à Supabase les supprime ou que le projet/la base soit supprimé. Ce n'est pas une garantie d'archivage « à vie » indépendante du compte d'hébergement.
+- Le site n'offre aucun bouton de suppression ou de modification ; les visiteurs peuvent lire et ajouter des bilans.
+- Comme le site permet aux visiteurs d'envoyer des scores sans compte, un visiteur déterminé pourrait falsifier un score en appelant l'API directement. Cette version convient à un classement RP simple, pas à une compétition anti-triche.
+- Les anciens résultats enregistrés dans le stockage local d'une ancienne version ne sont pas transférés automatiquement dans la nouvelle base. Ils resteront seulement dans le navigateur d'origine, sauf saisie manuelle dans Supabase.
+- Sans URL et clé renseignées, le site reste en mode local et les résultats ne sont pas partagés. Le statut sur la page le signale.
+
+Protection des clés
+-------------------
+Seule la clé Publishable doit être utilisée dans le HTML public, avec les permissions limitées par les règles SQL. N'utilisez jamais de clé Secret ou service_role dans un fichier accessible aux candidats.
