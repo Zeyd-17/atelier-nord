@@ -63,7 +63,7 @@
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 // STOCKAGE PARTAGÉ : remplir ces deux champs avec l'URL du projet Supabase et sa clé publishable.
 // N'utilise JAMAIS une clé "secret" ou "service_role" dans ce fichier public.
-const SUPABASE_URL = 'https://rjuwttczabrxrqigehfw.supabase.co/rest/v1/';
+const SUPABASE_URL = 'https://rjuwttczabrxrqigehfw.supabase.co/';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_C3NQ-fPTVGdd7zqqgvo1cw_bL9mr38w';
 const remoteEnabled = Boolean(SUPABASE_URL.trim() && SUPABASE_PUBLISHABLE_KEY.trim());
 const apiUrl = () => `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/atelier_nord_bilans`;
