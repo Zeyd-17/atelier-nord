@@ -67,7 +67,10 @@ const SUPABASE_URL = 'https://rjuwttczabrxrqigehfw.supabase.co/rest/v1/';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_C3NQ-fPTVGdd7zqqgvo1cw_bL9mr38w';
 const remoteEnabled = Boolean(SUPABASE_URL.trim() && SUPABASE_PUBLISHABLE_KEY.trim());
 const apiUrl = () => `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/atelier_nord_bilans`;
-const apiHeaders = () => ({apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Content-Type':'application/json'});
+const apiHeaders = () => ({
+  apikey: SUPABASE_PUBLISHABLE_KEY,
+  'Content-Type': 'application/json'
+});
 let score=0,done=[false,false,false],timers={},running=[false,false,false],penalty=0,partsDone=0,dragging=null,diag=0,diagScores=0,diagStarted=false,diagTransition=false,bolt=0,needlePos=0,needleDir=1,needleTimer=null,misses=0,zoneWidth=10;
 const name=()=>$('#candidate').value.trim()||'Candidat anonyme',RESULT_KEY='atelierNordFinalScores',PENDING_KEY='atelierNordPendingSharedScores';
 let results=[],pendingRemote=[];
