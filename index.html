@@ -171,5 +171,5 @@ $('#tighten').onclick=()=>{if(!running[2])return;const left=50-zoneWidth/2,right
 document.addEventListener('keydown',e=>{if(e.code!=='Space'||!running[2])return;const target=e.target;if(target instanceof HTMLElement&&(target.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)))return;e.preventDefault();if(!e.repeat)$('#tighten').click()});
 $('#reset3').onclick=()=>{running[2]=false;cancelAnimationFrame(needleTimer);clearInterval(timers[2]);$('#tighten').disabled=true;bolt=0;misses=0;needlePos=0;needleDir=1;updateTorque();$('#t3').textContent='5 vis restantes';$('#f3').textContent='Lance le serrage, puis appuie sur SERRER ou Espace. La vitesse augmente à chaque vis ; 3 erreurs maximum sont autorisées.'};
 $('#candidate').addEventListener('change',()=>log('a renseigné son pseudo candidat'));
-$('#report').onclick=async()=>{const text=`ATELIER NORD — ${name()} — Score final : ${score}/300`;try{await navigator.clipboard.writeText(text);$('#reportMsg').textContent='Bilan copié !'}catch(e){$('#reportMsg').textContent=text}};
+$('#report').onclick=async()=>{const text=`I-Custom — ${name()} — Score final : ${score}/300`;try{await navigator.clipboard.writeText(text);$('#reportMsg').textContent='Bilan copié !'}catch(e){$('#reportMsg').textContent=text}};
 })();</script></body></html>
